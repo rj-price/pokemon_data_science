@@ -106,9 +106,12 @@ print(df_type_combinations)
 Dash is a Python framework for building web applications that are powered by Plotly visualizations. We can use it to create an interactive dashboard that allows the user to explore the data in more depth. Here's an example dashboard that shows the distribution of Pokémon by type and allows the user to filter by generation:
 ```
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 import plotly.express as px
+
+# Create a connection to the SQLite database
+conn = sqlite3.connect('pokemon.db')
 
 # Define the app
 app = dash.Dash(__name__)
