@@ -105,13 +105,15 @@ print(df_type_combinations)
 ### Step 5: Create a dashboard or interactive visualization
 Dash is a Python framework for building web applications that are powered by Plotly visualizations. We can use it to create an interactive dashboard that allows the user to explore the data in more depth. Here's an example dashboard that shows the distribution of Pokémon by type and allows the user to filter by generation:
 ```
+import sqlite3
+import pandas as pd
 import dash
 from dash import dcc
 from dash import html
 import plotly.express as px
 
 # Create a connection to the SQLite database
-conn = sqlite3.connect('pokemon.db')
+conn = sqlite3.connect('pokemon.db', check_same_thread=False)
 
 # Define the app
 app = dash.Dash(__name__)
@@ -162,18 +164,12 @@ def update_type_counts(generation):
 
 # Run the app
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True)
 ```
 In this example, we first import the necessary libraries and create a connection to the SQLite database. We then define the layout of the dashboard using the html.Div and dcc components provided by Dash. The dcc.Dropdown component allows the user to select a generation, and the dcc.Graph component displays the distribution of Pokémon types for the selected generation.
 
 We define a callback function using the @app.callback decorator. This function takes the selected generation as an input and returns a Plotly bar chart of the distribution of Pokémon types for that generation. The dash.dependencies.Output and dash.dependencies.Input decorators are used to specify the inputs and outputs of the callback function.
 
-Finally, we run the app using the app.run_server() method.
+Finally, we run the app using the app.run() method.
 
 To run this example, save the code to a file named app.py and run python app.py in the terminal. Then, open a web browser and go to http://127.0.0.1:8050/ to view the dashboard.
-
-## Deliverables
-The deliverables for this project could include:
- * A Jupyter notebook or Python script containing the code used for data cleaning, exploration, and visualization.
- * A SQL script containing the queries used to extract and analyze the data.
- * A dashboard or interactive visualization that allows the user to explore the data in more depth.

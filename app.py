@@ -1,11 +1,12 @@
 import sqlite3
+import pandas as pd
 import dash
 from dash import dcc
 from dash import html
 import plotly.express as px
 
 # Create a connection to the SQLite database
-conn = sqlite3.connect('pokemon.db')
+conn = sqlite3.connect('pokemon.db', check_same_thread=False)
 
 # Define the app
 app = dash.Dash(__name__)
@@ -56,4 +57,4 @@ def update_type_counts(generation):
 
 # Run the app
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True)
